@@ -1,4 +1,4 @@
-(ns clj-math.stats)
+(ns clj-math.stats [:require [clojure.contrib [math :as math]]])
 
 ; Scale a number between 0 and 1.
 (defn scale [n min max] 
@@ -17,3 +17,9 @@
       (mean [(nth ordered-list (quot length 2))
              (nth ordered-list (- (quot length 2) 1))])
       (nth ordered-list (quot length 2)))))
+
+; Calculate variance
+(defn variance [xs]
+  (let [m (mean xs)
+        length (count xs)]
+    (/ (apply + (map #(math/expt (- %1 m) 2) xs)) (- length 1))))
