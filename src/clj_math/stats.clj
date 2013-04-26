@@ -23,3 +23,7 @@
   (let [m (mean xs)
         length (count xs)]
     (/ (apply + (map #(math/expt (- %1 m) 2) xs)) (- length 1))))
+
+; Standard Deviation
+(defn standard-deviation [xs]
+  (math/sqrt (variance xs)))
