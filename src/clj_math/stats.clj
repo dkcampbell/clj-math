@@ -23,8 +23,8 @@
 ; list will be returned.
 (defn mode [xs]
   (let [tally (frequencies xs)]
-    (first (first (into 
-          (sorted-map-by #(compare (get tally %2) (get tally %1))) tally)))))
+    (ffirst (into 
+          (sorted-map-by #(compare (get tally %2) (get tally %1))) tally))))
 
 ; Calculate variance
 (defn variance [xs]
