@@ -18,6 +18,14 @@
              (nth ordered-list (- (quot length 2) 1))])
       (nth ordered-list (quot length 2)))))
 
+; Find the most common element in a list.
+; If more than one number occurs equally as often. The first number in the 
+; list will be returned.
+(defn mode [xs]
+  (let [tally (frequencies xs)]
+    (first (first (into 
+          (sorted-map-by #(compare (get tally %2) (get tally %1))) tally)))))
+
 ; Calculate variance
 (defn variance [xs]
   (let [m (mean xs)
@@ -27,3 +35,9 @@
 ; Standard Deviation
 (defn standard-deviation [xs]
   (math/sqrt (variance xs)))
+
+; Quartiles
+;;(defn quartiles [xs]
+;  (let [ordered-list (sort xs)
+;        length (count ordered-list)]
+;    ))
