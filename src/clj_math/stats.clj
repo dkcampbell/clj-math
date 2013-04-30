@@ -48,6 +48,13 @@
   [xs]
   (math/sqrt (variance xs)))
 
+; Root mean square
+(defn rms
+  "Calculate the root mean square"
+  [xs]
+  (let [len (count xs)]
+    (math/sqrt (/ (reduce + (map #(* % %) xs)) len))))
+
 ; Quartiles
 ;;(defn quartiles [xs]
 ;  (let [ordered-list (sort xs)
