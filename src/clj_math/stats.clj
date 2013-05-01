@@ -50,10 +50,16 @@
 
 ; Root mean square
 (defn rms
-  "Calculate the root mean square"
+  "Calculate the root mean square."
   [xs]
   (let [len (count xs)]
-    (math/sqrt (/ (reduce + (map #(* % %) xs)) len))))
+    (math/sqrt (/ (apply + (map #(math/expt %1 2) xs)) len))))
+
+; Moving average
+(defn moving-average
+  "Calculate the moving average."
+  [xs]
+  (map mean (partition 2 1 xs)))
 
 ; Quartiles
 ;;(defn quartiles [xs]
