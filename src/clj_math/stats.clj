@@ -13,7 +13,7 @@
   (/ (apply + xs) (count xs)))
 
 ; Calculate the median of a list.
-; Naieve implementation
+; Naive implementation
 (defn median 
   "Calculate the median of a list."
   [xs]
@@ -41,7 +41,7 @@
   (let [m (mean xs)
         length (count xs)]
     (/ (apply + (map #(math/expt (- %1 m) 2) xs)) (- length 1))))
-
+/
 ; Standard Deviation
 (defn standard-deviation 
   "Calculate standard deviation of a list."
@@ -62,7 +62,13 @@
   (map mean (partition 2 1 xs)))
 
 ; Quartiles
-;;(defn quartiles [xs]
-;  (let [ordered-list (sort xs)
-;        length (count ordered-list)]
-;    ))
+(defn quartiles [xs]
+  (let [ordered-list (sort xs)
+        length (count ordered-list)]
+    (if (even? length)
+      [(median (take (/ length 2) xs)) (median xs) (median (drop (/ length 2) xs))] 
+      [(mean [(median (take (/ (- length 1) 2) ordered-list))
+              (median (take (/ (+ length 1) 2) ordered-list))]) 
+       (median xs) 
+       (mean [(median (drop (/ (- length 1) 2) ordered-list))
+              (median (drop (/ (+ length 1) 2) ordered-list))])])))
