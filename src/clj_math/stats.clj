@@ -90,3 +90,9 @@
   (let [length (count xs)
         m (mean xs)]
    (/ (apply + (map #(math/expt (- %1 m) r) xs)) length)))
+
+; Calculate Skew
+(defn skew
+  "Calculate skew of a list."
+  [xs]
+  (/ (central-moment xs 3) (math/expt (central-moment xs 2) 3/2)))
