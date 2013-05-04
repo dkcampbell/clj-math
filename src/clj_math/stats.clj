@@ -83,6 +83,13 @@
    (last (quartiles xs))
    (apply max xs)])
 
+; Calculate a moment
+(defn moment
+  "Calculate the rth moment."
+  [xs r]
+  (let [length (count xs)]
+    (/ (apply + (map #(math/expt %1 r) xs)) length)))
+
 ; Calculate a Central Moment
 (defn central-moment
   "Calculate the rth central moment."
