@@ -72,16 +72,18 @@
        (median xs) 
        (mean [(median (drop (/ (- length 1) 2) ordered-list))
               (median (drop (/ (+ length 1) 2) ordered-list))])])))
+
 ; R like summary function (min 1st quart median mean 3rd quart max)
 (defn summary 
   "Stats summary function (min 1st-quart median mean 3rd-quart max)."
   [xs]
-  [(apply min xs) 
-   (first (quartiles xs)) 
-   (median xs) 
-   (mean xs) 
-   (last (quartiles xs))
-   (apply max xs)])
+  (let [[fst med lst] (quartiles xs)]
+    [(apply min xs) 
+     fst 
+     med 
+     (mean xs) 
+     lst 
+     (apply max xs)]))
 
 ; Calculate a moment
 (defn moment
